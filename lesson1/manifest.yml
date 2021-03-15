@@ -1,0 +1,8 @@
+---
+applications:
+- name: lesson1
+  memory: 256M
+  instances: 1
+  host: rest-service
+  domain: guides.spring.io
+  path: build/libs/lesson1-0.1.0.jar
