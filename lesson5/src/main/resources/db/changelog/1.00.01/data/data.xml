@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+  
+  <changeSet id="1.0.1_data_inserts_automodel" author="daleshin" runInTransaction="false" context="update">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="automodel"/>
+    </preConditions>
+    <insert tableName="automodel">
+      <column name="modelId">1</column>
+      <column name="markId">1</column>
+      <column name="briefName">A-class</column>
+      <column name="fullName">A-class</column>
+      <column name="year">2020</column>
+      <column name="category">Легковой</column>
+    </insert>
+    <insert tableName="automodel">
+      <column name="modelId">2</column>
+      <column name="markId">1</column>
+      <column name="briefName">CLA</column>
+      <column name="fullName">CLA</column>
+      <column name="year">2019</column>
+      <column name="category">Легковой</column>
+    </insert>
+    <insert tableName="automodel">
+      <column name="modelId">3</column>
+      <column name="markId">1</column>
+      <column name="briefName">GLA</column>
+      <column name="fullName">GLA</column>
+      <column name="year">2020</column>
+      <column name="category">Легковой</column>
+    </insert>
+    <insert tableName="automodel">
+      <column name="modelId">4</column>
+      <column name="markId">1</column>
+      <column name="briefName">Vito</column>
+      <column name="fullName">Vito</column>
+      <column name="year">2019</column>
+      <column name="category">Грузовой</column>
+    </insert>
+    <insert tableName="automodel">
+      <column name="modelId">5</column>
+      <column name="markId">2</column>
+      <column name="briefName">Auris</column>
+      <column name="fullName">Auris</column>
+      <column name="year">2020</column>
+      <column name="category">Легковой</column>
+    </insert>
+    <insert tableName="automodel">
+      <column name="modelId">6</column>
+      <column name="markId">2</column>
+      <column name="briefName">Camry</column>
+      <column name="fullName">Camry</column>
+      <column name="year">2020</column>
+      <column name="category">Легковой</column>
+    </insert>
+    <insert tableName="automodel">
+      <column name="modelId">7</column>
+      <column name="markId">2</column>
+      <column name="briefName">Hilux</column>
+      <column name="fullName">Hilux</column>
+      <column name="year">2019</column>
+      <column name="category">Пикап</column>
+    </insert>
+    <insert tableName="automodel">
+      <column name="modelId">8</column>
+      <column name="markId">3</column>
+      <column name="briefName">NX</column>
+      <column name="fullName">NX</column>
+      <column name="year">2020</column>
+      <column name="category">Легковой</column>
+    </insert>
+    <insert tableName="automodel">
+      <column name="modelId">9</column>
+      <column name="markId">3</column>
+      <column name="briefName">RX</column>
+      <column name="fullName">RX</column>
+      <column name="year">2020</column>
+      <column name="category">Легковой</column>
+    </insert>
+    <insert tableName="automodel">
+      <column name="modelId">10</column>
+      <column name="markId">4</column>
+      <column name="briefName">Polo</column>
+      <column name="fullName">Polo</column>
+      <column name="year">2020</column>
+      <column name="category">Легковой</column>
+    </insert>
+	<rollback>
+		<delete tableName="automodel">
+			<where>modelId in (1,2,3,4,5,6,7,8,9,10)</where>
+		</delete>
+	</rollback>
+  </changeSet>
+
+</databaseChangeLog>

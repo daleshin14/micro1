@@ -1,0 +1,29 @@
+server:
+  port: ${SERVICE_PORT:7081}
+
+spring:
+# Postgres
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/lesson5
+    username: postgres
+    password: postgres
+    hikari:
+      connection-test-query:
+    liquibase:
+      change-log: classpath:/db/changelog/db.changelog-master.xml
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+    show-sql: true
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+      naming: 
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true # Для PostgreSQL установить в true, для MSSQL, Oracle в false
+        jdbc:
+          time_zone: UTC
+          lob:
+            non_contextual_creation: true
