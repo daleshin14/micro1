@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	
+	<property name="autoIncrement" value="false" dbms="postgresql,mssql,oracle,h2" />
+
+	<changeSet id="1.0.1_create_table_automodel" author="daleshin" context="update" runInTransaction="false">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="automodel" />
+			</not>
+		</preConditions>
+		<createSequence sequenceName="automodel_seq" incrementBy="1" startValue="100" />
+		<createTable tableName="automodel" remarks="Модели авто">
+			<column name="modelId" type="BIGINT"
+				autoIncrement="${autoIncrement}" remarks="Идентификатор модели">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="markId" type="BIGINT" remarks="Идентификатор марки">
+				<constraints nullable="false" />
+			</column>
+			<column name="briefName" type="VARCHAR(255)" remarks="Сокращённое наименование">
+				<constraints nullable="false" />
+			</column>
+			<column name="fullName" type="VARCHAR(255)" remarks="Полное наименование">
+				<constraints nullable="true" />
+			</column>
+			<column name="year" type="BIGINT" remarks="Модельный год">
+				<constraints nullable="true" />
+			</column>
+			<column name="category" type="VARCHAR(255)" remarks="Категория авто">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+	</changeSet>
+		
+</databaseChangeLog>
