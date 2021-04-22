@@ -2,28 +2,17 @@ server:
   port: ${SERVICE_PORT:7081}
 
 spring:
-# Postgres
+# h2
   datasource:
-    driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/lesson5
-    username: postgres
-    password: postgres
-    hikari:
-      connection-test-query:
+    driverClassName: ${DB_DRIVER:org.h2.Driver}
+    url: ${DB_URL:jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1}
+    username: ${DB_LOGIN:sa}
+    password: ${DB_PASSWORD:}
     liquibase:
       change-log: classpath:/db/changelog/db.changelog-master.xml
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
-    show-sql: true
-    generate-ddl: false
+    database-platform: ${JPA_DIALECT:org.hibernate.dialect.H2Dialect}
+    generate-ddl: ${GENERATE_DDL:true}
     hibernate:
-      ddl-auto: none
       naming: 
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    properties:
-      hibernate:
-        globally_quoted_identifiers: true # Для PostgreSQL установить в true, для MSSQL, Oracle в false
-        jdbc:
-          time_zone: UTC
-          lob:
-            non_contextual_creation: true

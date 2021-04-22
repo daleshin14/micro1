@@ -8,19 +8,20 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ActiveProfiles;
 
 import lombok.extern.slf4j.Slf4j;
 import ru.diasoft.micro.demo.dto.AutoModelDto;
 import ru.diasoft.micro.demo.dto.AutoModelMapper;
-import ru.diasoft.micro.demo.dto.AutoModelMapper2;
 import ru.diasoft.micro.demo.repository.AutoModel;
 import ru.diasoft.micro.demo.repository.AutoModelRepository;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.argThat;
 
 @DisplayName("AutoModelService test")
 @SpringBootTest
@@ -34,14 +35,18 @@ class AutoModelServiceTest {
 	@MockBean
 	private AutoModelMapper autoModelMapper;
 	
-    //@Autowired 
-    private AutoModelService autoModelService;
-
-    @BeforeEach
-    public void setUp() {
-        autoModelService =
-                new AutoModelServiceImpl(repository, autoModelMapper);
+	@TestConfiguration
+    class AutoModelServiceImplTestContextConfiguration {
+ 
+        @Bean
+        public AutoModelService autoModelService() {
+            return new AutoModelServiceImpl(repository, autoModelMapper);
+        }
+        
     }
+
+    @Autowired
+    private AutoModelService autoModelService;
     
     private AutoModel getMockAutoModelEntity() {
     	AutoModel obj = AutoModel.builder()
@@ -79,10 +84,8 @@ class AutoModelServiceTest {
     }
 
     @BeforeEach
-    public void init() {
+    public void setUp() {
         Mockito.when(repository.save(any(AutoModel.class))).thenReturn(getMockAutoModelEntity());
-//        Mockito.when(repository.save(argThat(new AutoModelMatcher(new AutoModel("briefName"))))).thenReturn(getMockAutoModelEntity());
-//        Mockito.when(repository.save(argThat(new AutoModelMatcher(new AutoModel("briefName2"))))).thenReturn(getMockAutoModelEntity2());
         Mockito.when(repository.saveAndFlush(any(AutoModel.class))).thenReturn(getMockAutoModelEntity());
         Mockito.when(repository.findById(10L)).thenReturn(Optional.of(getMockAutoModelEntity()));
         Mockito.when(repository.findById(20L)).thenReturn(Optional.of(getMockAutoModelEntity2()));
@@ -116,7 +119,7 @@ class AutoModelServiceTest {
         autoModelService.update(mock);
 
         AutoModelDto link2 = autoModelService.findById(mock.getModelId());
-
+        log.info("update link2="+link2);
      //   Assertions.assertEquals(mock, link2);//TODO
     }
 
