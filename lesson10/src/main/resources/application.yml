@@ -1,0 +1,14 @@
+spring:
+  kafka:
+    bootstrap-servers: ${MESSAGE_BROKER_URL:localhost:9092}
+  cloud:
+    stream:
+      binders:
+        binderName:
+          type: kafka
+      bindings:
+        demo-event:
+          destination: demo
+          group: my-adapter-group1
+          consumer:
+            concurrency: 1
