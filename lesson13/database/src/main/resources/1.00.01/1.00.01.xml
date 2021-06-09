@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	
+    <property name="autoIncrement" value="false" dbms="postgresql,mssql,oracle,h2"/>
+    <!--property name="autoIncrement" value="true" dbms="h2"/-->
+
+	<changeSet id="1.0.1_create_dq_smsverify" author="daleshin" context="update" runInTransaction="false">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="dq_smsverify" />
+			</not>
+		</preConditions>
+		<createSequence sequenceName="dq_smsverify_seq" incrementBy="2" startValue="200" />
+		<createTable tableName="dq_smsverify" remarks="Проверка отправки">
+			<column name="smsVerifyId" type="BIGINT"
+				autoIncrement="${autoIncrement}" remarks="Идентификатор записи">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="guid" type="VARCHAR(50)" remarks="Guid запроса">
+				<constraints nullable="false" />
+			</column>
+			<column name="creationDate" type="DATETIME" remarks="Дата создания">
+				<constraints nullable="false" />
+			</column>
+			<column name="phoneNumber" type="VARCHAR(50)" remarks="Номер телефона">
+				<constraints nullable="true" />
+			</column>
+			<column name="secretCode" type="VARCHAR(50)" remarks="Проверочный код">
+				<constraints nullable="true" />
+			</column>
+			<column name="status" type="VARCHAR(50)" remarks="Статус">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+		
+		<createIndex tableName="dq_smsverify" indexName="k01_dq_smsverify" unique="true">
+			<column name="guid"/>
+		</createIndex>
+		<createIndex tableName="dq_smsverify" indexName="k02_dq_smsverify" unique="false">
+			<column name="secretCode"/>
+			<column name="status"/>
+		</createIndex>
+	</changeSet>
+		
+</databaseChangeLog>
