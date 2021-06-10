@@ -1,0 +1,7 @@
+blacklist: |-
+  PUT, POST /corews/block2
+whitelist: |-
+  GET, DELETE /corews/**
+  /corews/block2
+  /template/**
+  /simple-rest-service/**

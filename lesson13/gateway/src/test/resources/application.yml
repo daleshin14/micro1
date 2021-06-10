@@ -1,0 +1,19 @@
+
+server:
+  port: 9999
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+eureka:
+  client:
+    enabled: false
+
+gateway:
+  params:
+    rule-list-dir: src/test/resources
+    rule-list-name: client-whitelist.yaml
+    rule-list-cache-time-live-min: 0

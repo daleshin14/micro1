@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: gateway
+#  cloud:
+#    config:
+#      uri: http://${CONFIG_INSTANCE_HOSTNAME}:${CONFIG_INSTANCE_PORT}
+spring.cloud.config.enabled: ${USE_CONFIG_SERVER:true}

@@ -1,0 +1,7 @@
+blacklist: |-
+  PUT, POST /corews/block2
+
+whitelist: |-
+  DELETE /corews/**
+  /corews/block2
+  /template/**

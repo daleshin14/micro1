@@ -61,16 +61,6 @@ class SmsVerificationServiceTest {
 		Mockito.when(repository.findByGuidAndSecretCodeAndStatus(GUID, NOT_VALID_CODE, STATUS_OK)).thenReturn(Optional.empty());
 		Mockito.when(repository.save(any(SmsVerification.class))).thenReturn(mock);
     }
-
-//    @BeforeEach
-//    public void setUp() {
-//        Mockito.when(repository.save(any(AutoModel.class))).thenReturn(getMockAutoModelEntity());
-//        Mockito.when(repository.saveAndFlush(any(AutoModel.class))).thenReturn(getMockAutoModelEntity());
-//        Mockito.when(repository.findById(10L)).thenReturn(Optional.of(getMockAutoModelEntity()));
-//        Mockito.when(repository.findById(20L)).thenReturn(Optional.of(getMockAutoModelEntity2()));
-//        Mockito.when(autoModelMapper.map(any(AutoModel.class), any())).thenReturn(getAutoModelDtoEntity());
-//        Mockito.when(autoModelMapper.map(any(AutoModelDto.class), any())).thenReturn(getMockAutoModelEntity());
-//    }
     
     @Test
     @DisplayName("dsSmsVerificationCreateTest")

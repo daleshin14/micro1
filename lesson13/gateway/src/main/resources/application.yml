@@ -1,0 +1,32 @@
+server:
+  port: ${GATEWAY_PORT}
+  error:
+    include-stacktrace: always
+    include-exception: true
+    whitelabel:
+      enabled: false
+
+eureka:
+  client:
+    enabled: true
+    register-with-eureka: false
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${EUREKA_URL}
+
+#logging:
+#  level:
+#    root: DEBUG
+#    org.springframework.gateway: TRACE
+        
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+gateway:
+  params:
+    rule-list-dir: ${RULE_LIST_DIR:./}
+    rule-list-name: ${RULE_LIST_NAME:}
+    rule-list-cache-time-live-min: ${CACHE_TIME_LIVE_MIN:5}

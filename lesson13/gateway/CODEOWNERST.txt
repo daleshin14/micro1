@@ -1,0 +1,5 @@
+# Владельцы кода
+
+# Весь проект
+* kshcherbakov@diasoft.ru
+
